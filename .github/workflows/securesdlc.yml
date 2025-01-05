@@ -17,19 +17,19 @@ jobs:
           curl -s -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.SDLC_READ_ACTION }}" \
-            -o downstream-workflow.json \
+            -o downstream--file.json \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
       - name: Decode workflow
         run: |
           ls
-          cat downstream-workflow.json | jq -r .content | base64 -d > ./.github/workflows/workflow.yml
-          cat workflow.yml
+          cat downstream-workflow-file.json | jq -r .content | base64 -d > ./.github/workflows/workflow.yml
+          cat ./.github/workflows/workflow.yml
 
   run-securesdlc:
     runs-on: ubuntu-24.04
     needs: fetch-securesdlc
     name: aaa
-    uses: ./.github/workflows/workflow.yml
+    uses: ./.github/workflows/workflow.yml@main
 
   # include-securesdlc:
   #   needs: authenticate
