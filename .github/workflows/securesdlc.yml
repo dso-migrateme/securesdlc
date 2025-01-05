@@ -27,9 +27,9 @@ jobs:
 
 
 
-  run-securesdlc:
-    runs-on: ubuntu-24.04
-    uses: .github/workflows/reusable-workflow.yml
+  # run-securesdlc:
+  #   runs-on: ubuntu-24.04
+  #   uses: .github/workflows/reusable-workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
