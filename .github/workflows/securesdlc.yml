@@ -9,16 +9,11 @@ on:
       - master
 
 jobs:
-  downstream:
-    permissions:
-      contents: read  # Grants read access to the private repository
+  authenticate:
+    runs-on: ubuntu-latest
     steps:
       - name: Authenticate with GITHUB_TOKEN
         run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+  include-securesdlc:
+    needs: authenticate
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
-  test-step:
-    steps:
-      - name: Canary step
-        run: |
-          echo "SecureSDLC"
-
