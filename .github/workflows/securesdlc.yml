@@ -24,6 +24,7 @@ jobs:
         run: |
           cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
           # cat .github/workflows/workflow.yml
+      - uses: actions/checkout@v4
       - name: Run workflow
         uses: ./.github/workflows/workflow.yml@main
 
