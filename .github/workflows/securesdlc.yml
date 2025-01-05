@@ -17,7 +17,7 @@ jobs:
           curl -s -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.SDLC_READ_ACTION }}" \
-            -o downstream--file.json \
+            -o downstream-workflow-file.json \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
       - name: Decode workflow
         run: |
