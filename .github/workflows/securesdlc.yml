@@ -22,16 +22,18 @@ jobs:
         env:
           PAT: ${{ secrets.SDLC_READ_ACTION }}
         run: |
-          curl -s -H "Authorization: token ${PAT}" \
-          -o .github/workflows/reusable-workflow.yml \
-          https://raw.githubusercontent.com/dso-migrateme/securesdlc-sast/main/.github/workflows/securesdlc-sast.yml
+          curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${PAT}" \
+            -o .github/workflows/reusable-workflow.yml \
+            "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
           cat .github/workflows/reusable-workflow.yml
 
-      - name: Run the Fetched Workflow
-        run: |
-          echo "Running the fetched workflow dynamically..."
-          cat .github/workflows/reusable-workflow.yml
-          # Add logic here to execute the fetched workflow if needed
+      # - name: Run the Fetched Workflow
+      #   run: |
+      #     echo "Running the fetched workflow dynamically..."
+      #     cat .github/workflows/reusable-workflow.yml
+      #     # Add logic here to execute the fetched workflow if needed
 
     # run-securesdlc:
     #   runs-on: ubuntu-latest
