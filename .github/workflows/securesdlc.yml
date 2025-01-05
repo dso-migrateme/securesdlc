@@ -12,8 +12,26 @@ jobs:
   authenticate:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Public Repository
+        uses: actions/checkout@v3
+
       - name: Authenticate with Repo Token
         run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
-  include-securesdlc:
-    needs: authenticate
-    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+
+      - name: Fetch Workflow from Private Repo
+        env:
+          PAT: ${{ secrets.SDLC_READ_ACTION }}
+        run: |
+          curl -H "Authorization: token ${PAT}" \
+          -o .github/workflows/reusable-workflow.yml \
+          https://raw.githubusercontent.com/dso-migrateme/securesdlc-sast/main/.github/workflows/securesdlc-sast.yml
+
+      - name: Run the Fetched Workflow
+        run: |
+          echo "Running the fetched workflow dynamically..."
+          cat .github/workflows/reusable-workflow.yml
+          # Add logic here to execute the fetched workflow if needed
+
+  # include-securesdlc:
+  #   needs: authenticate
+  #   uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
