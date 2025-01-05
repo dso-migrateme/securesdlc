@@ -1,14 +1,19 @@
 name: SecureSDLC
 
 on:
-  pull_request: {}
   workflow_dispatch: {}
+  pull_request: {}
   push:
     branches:
       - main
       - master
 
 jobs:
-  include-reusable-workflow:
+  umbrella-include:
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+  test-step:
+    steps:
+      - name: Canary step
+        run: |
+          echo "SecureSDLC"
 
