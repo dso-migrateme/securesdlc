@@ -25,7 +25,7 @@ jobs:
           cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
           # cat .github/workflows/workflow.yml
       - name: Run workflow
-        uses: ./.github/workflows/workflow.yml
+        uses: ./.github/workflows/workflow.yml@main
 
   # include-securesdlc: # public can not include from private
   #   needs: authenticate
