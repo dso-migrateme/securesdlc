@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  pull-securesdlc:
+  fetch-securesdlc:
     runs-on: ubuntu-24.04
     steps:
       - name: Fetch workflow file
@@ -24,14 +24,11 @@ jobs:
           ls
           cat downstream-workflow.json | jq -r .content | base64 -d > workflow.yml
           cat workflow.yml
-      # - name: Run downstream workflow
-      #   run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
 
-
-
-  # run-securesdlc:
-  #   runs-on: ubuntu-24.04
-  #   uses: .github/workflows/reusable-workflow.yml
+  run-securesdlc:
+    runs-on: ubuntu-24.04
+    needs: fetch-securesdlc
+    uses: workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
