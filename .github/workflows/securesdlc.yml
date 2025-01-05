@@ -29,9 +29,9 @@ jobs:
             jq -r .content | base64 > .github/workflows/reusable-workflow.yml
           cat .github/workflows/reusable-workflow.yml
 
-    run-securesdlc:
-      runs-on: ubuntu-latest
-      uses: .github/workflows/reusable-workflow.yml
+  run-securesdlc:
+    runs-on: ubuntu-latest
+    uses: .github/workflows/reusable-workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
