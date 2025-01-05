@@ -22,15 +22,14 @@ jobs:
       - name: Decode workflow
         run: |
           ls
-          cat downstream-workflow.json | jq -r .content | base64 -d > workflow.yml
+          cat downstream-workflow.json | jq -r .content | base64 -d > ./.github/workflows/workflow.yml
           cat workflow.yml
 
   run-securesdlc:
     runs-on: ubuntu-24.04
     needs: fetch-securesdlc
-    steps:
-     - name: Run workflow
-       uses: workflow.yml
+    name: aaa
+    uses: ./.github/workflows/workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
