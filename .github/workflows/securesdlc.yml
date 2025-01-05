@@ -12,8 +12,8 @@ jobs:
   authenticate:
     runs-on: ubuntu-latest
     steps:
-      - name: Authenticate with GITHUB_TOKEN
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-  # include-securesdlc:
-  #   needs: authenticate
-  #   uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+      - name: Authenticate with Repo Token
+        run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
+  include-securesdlc:
+    needs: authenticate
+    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
