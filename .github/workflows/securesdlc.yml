@@ -12,6 +12,9 @@ jobs:
   downstream:
     permissions:
       contents: read  # Grants read access to the private repository
+    steps:
+      - name: Authenticate with GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
   test-step:
     steps:
