@@ -25,7 +25,7 @@ jobs:
           cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
           # cat .github/workflows/workflow.yml
       - name: Run workflow
-        uses: ./.github/workflows/workflow.yml@main
+        uses: ./.github/workflows/workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
