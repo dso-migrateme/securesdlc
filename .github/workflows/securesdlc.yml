@@ -12,7 +12,7 @@ jobs:
   pull-securesdlc:
     runs-on: ubuntu-24.04
     steps:
-      - name: Fetch Workflow from Private Repo
+      - name: Fetch workflow
         env:
           PAT: ${{ secrets.SDLC_READ_ACTION }}
         run: |
@@ -20,10 +20,11 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${PAT}" \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml" \
-            jq -r .content | base64 -d > downstream-workflow.yml
+            jq -r .content > downstream-workflow.yml
           ls
           cat downstream-workflow.yml
-      # - name: Authenticate with Repo Token
+          cat downstream-workflow.yml | base64 -d
+      # - name: Run downstream workflow
       #   run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
 
 
