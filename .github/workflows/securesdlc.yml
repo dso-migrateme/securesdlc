@@ -28,7 +28,9 @@ jobs:
   run-securesdlc:
     runs-on: ubuntu-24.04
     needs: fetch-securesdlc
-    uses: workflow.yml
+    steps:
+     - name: Run workflow
+       uses: workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
