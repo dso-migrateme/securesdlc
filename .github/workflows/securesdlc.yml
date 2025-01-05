@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  authenticate:
+  pull-and-run-securesdlc:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Public Repository
@@ -22,15 +22,20 @@ jobs:
         env:
           PAT: ${{ secrets.SDLC_READ_ACTION }}
         run: |
-          curl -H "Authorization: token ${PAT}" \
+          curl -s -H "Authorization: token ${PAT}" \
           -o .github/workflows/reusable-workflow.yml \
           https://raw.githubusercontent.com/dso-migrateme/securesdlc-sast/main/.github/workflows/securesdlc-sast.yml
+          cat .github/workflows/reusable-workflow.yml
 
       - name: Run the Fetched Workflow
         run: |
           echo "Running the fetched workflow dynamically..."
           cat .github/workflows/reusable-workflow.yml
           # Add logic here to execute the fetched workflow if needed
+
+    # run-securesdlc:
+    #   runs-on: ubuntu-latest
+    #   uses: .github/workflows/reusable-workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
