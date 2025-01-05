@@ -21,9 +21,11 @@ jobs:
             -H "Authorization: token ${PAT}" \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml" \
             jq -r .content > downstream-workflow.yml
+      - name: Check
+        run: |
           ls
           cat downstream-workflow.yml
-          cat downstream-workflow.yml | base64 -d
+          # cat downstream-workflow.yml | base64 -d
       # - name: Run downstream workflow
       #   run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
 
