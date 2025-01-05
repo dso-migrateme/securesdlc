@@ -9,8 +9,8 @@ on:
       - master
 
 jobs:
-  pull-and-run-securesdlc:
-    runs-on: ubuntu-latest
+  pull-securesdlc:
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Public Repository
         uses: actions/checkout@v3
@@ -29,15 +29,9 @@ jobs:
             jq -r .content | base64 > .github/workflows/reusable-workflow.yml
           cat .github/workflows/reusable-workflow.yml
 
-      # - name: Run the Fetched Workflow
-      #   run: |
-      #     echo "Running the fetched workflow dynamically..."
-      #     cat .github/workflows/reusable-workflow.yml
-      #     # Add logic here to execute the fetched workflow if needed
-
-    # run-securesdlc:
-    #   runs-on: ubuntu-latest
-    #   uses: .github/workflows/reusable-workflow.yml
+    run-securesdlc:
+      runs-on: ubuntu-latest
+      uses: .github/workflows/reusable-workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
