@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: fetch-securesdlc
     name: aaa
-    uses: .github/workflows/workflow.yml@main
+    uses: ./.github/workflows/workflow.yml
 
   # include-securesdlc:
   #   needs: authenticate
