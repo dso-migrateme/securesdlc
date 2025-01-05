@@ -12,12 +12,6 @@ jobs:
   pull-securesdlc:
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout Public Repository
-        uses: actions/checkout@v3
-
-      - name: Authenticate with Repo Token
-        run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
-
       - name: Fetch Workflow from Private Repo
         env:
           PAT: ${{ secrets.SDLC_READ_ACTION }}
@@ -26,11 +20,15 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${PAT}" \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml" \
-            jq -r .content | base64 > .github/workflows/reusable-workflow.yml
+            jq -r .content | base64 -d > .github/workflows/reusable-workflow.yml
           cat .github/workflows/reusable-workflow.yml
+      # - name: Authenticate with Repo Token
+      #   run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
+
+
 
   run-securesdlc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     uses: .github/workflows/reusable-workflow.yml
 
   # include-securesdlc:
