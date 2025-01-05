@@ -12,6 +12,7 @@ jobs:
   fetch-securesdlc:
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v4
       - name: Fetch workflow file
         run: |
           curl -s -L \
@@ -22,8 +23,9 @@ jobs:
       - name: Decode workflow
         run: |
           ls
-          cat downstream-workflow-file.json | jq -r .content | base64 -d > ./.github/workflows/workflow.yml
-          cat ./.github/workflows/workflow.yml
+          cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
+          ls .github/workflows
+          cat .github/workflows/workflow.yml
 
   # run-securesdlc:
   #   runs-on: ubuntu-24.04
