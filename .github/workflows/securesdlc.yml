@@ -27,8 +27,10 @@ jobs:
 
 
   call-private-workflow:
-    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main"
-    token: ${{ secrets.SDLC_READ_ACTION }}
+    steps:
+      - name: sss
+        run: export GITHUB_TOKEN=${{ secrets.SDLC_READ_ACTION }}
+      - uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main"
 
   # include-securesdlc: # public can not include from private
   #   needs: authenticate
