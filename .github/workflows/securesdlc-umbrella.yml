@@ -1,0 +1,14 @@
+name: SecureSDLC
+
+on:
+  pull_request: {}
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  include-reusable-workflow:
+    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+
