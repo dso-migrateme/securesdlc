@@ -25,14 +25,6 @@ jobs:
   #         cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
   #         # cat .github/workflows/workflow.yml
 
-
-  call-private-workflow:
-    steps:
-      - name: sss
-        run: export GITHUB_TOKEN=${{ secrets.SDLC_READ_ACTION }}
-      - uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main"
-
-  # include-securesdlc: # public can not include from private
-  #   needs: authenticate
-  #   uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+  securesdlc: # public can not include from private
+    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
 
