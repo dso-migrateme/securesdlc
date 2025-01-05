@@ -19,8 +19,8 @@ jobs:
           curl -s -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${PAT}" \
-            "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml" \
-            jq -r .content
+            -o downstream-workflow.yml
+            "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
       - name: Fetch workflow
         run: |
           ls
