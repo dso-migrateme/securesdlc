@@ -9,7 +9,9 @@ on:
       - master
 
 jobs:
-  umbrella-include:
+  downstream:
+    permissions:
+      contents: read  # Grants read access to the private repository
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
   test-step:
     steps:
