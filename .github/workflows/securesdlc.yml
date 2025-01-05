@@ -22,11 +22,11 @@ jobs:
         env:
           PAT: ${{ secrets.SDLC_READ_ACTION }}
         run: |
-          curl -L \
+          curl -s -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${PAT}" \
-            -o .github/workflows/reusable-workflow.yml \
-            "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
+            "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml" \
+            jq -r .content | base64 > .github/workflows/reusable-workflow.yml
           cat .github/workflows/reusable-workflow.yml
 
       # - name: Run the Fetched Workflow
