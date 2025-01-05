@@ -12,20 +12,18 @@ jobs:
   pull-securesdlc:
     runs-on: ubuntu-24.04
     steps:
-      - name: Fetch workflow
-        env:
-          PAT: ${{ secrets.SDLC_READ_ACTION }}
+      - name: Fetch workflow file
         run: |
           curl -s -L \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token ${PAT}" \
+            -H "Authorization: Bearer ${{ secrets.SDLC_READ_ACTION }}" \
             -o downstream-workflow.yml \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
-      - name: Fetch workflow
+      - name: Decode workflow
         run: |
           ls
-          # cat downstream-workflow.yml
-          # cat downstream-workflow.yml | base64 -d
+          cat downstream-workflow.yml | jq -r .content > workflow.yml
+          cat workflow.yml
       # - name: Run downstream workflow
       #   run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
 
