@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  fetch-securesdlc:
+  securesdlc:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -27,6 +27,6 @@ jobs:
       - name: Run workflow
         uses: ./.github/workflows/workflow.yml
 
-  # include-securesdlc:
+  # include-securesdlc: # public can not include from private
   #   needs: authenticate
   #   uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
