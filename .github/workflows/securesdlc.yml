@@ -20,8 +20,9 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${PAT}" \
             "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml" \
-            jq -r .content | base64 -d > .github/workflows/reusable-workflow.yml
-          cat .github/workflows/reusable-workflow.yml
+            jq -r .content | base64 -d > downstream-workflow.yml
+          ls
+          cat downstream-workflow.yml
       # - name: Authenticate with Repo Token
       #   run: echo "${{ secrets.SDLC_READ_ACTION }}" | gh auth login --with-token
 
