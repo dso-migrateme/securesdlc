@@ -1,11 +1,19 @@
 name: SecureSDLC
 
+on:
+  workflow_dispatch: {}
+  pull_request: {}
+  workflow_call: {} # needed when being called from other workflow
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
   securesdlc:
     runs-on: ubuntu-24.04
     steps:
-      - name: test
+      - name: Test
         run: |
           echo "hi"
 
