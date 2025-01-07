@@ -25,6 +25,14 @@ jobs:
   #         cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
   #         # cat .github/workflows/workflow.yml
 
-  securesdlc: # public can not include from private
-    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+
+  securesdlc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch workflow file
+        run: |
+          echo "hi"
+
+  #   uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
 
