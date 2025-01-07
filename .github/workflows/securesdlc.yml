@@ -1,37 +1,11 @@
 name: SecureSDLC
 
-on:
-  workflow_dispatch: {}
-  pull_request: {}
-  workflow_call: {} # needed when being called from other workflow
-  push:
-    branches:
-      - main
-      - master
 
 jobs:
-  # securesdlc:
-  #   runs-on: ubuntu-24.04
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Fetch workflow file
-  #       run: |
-  #         curl -s -L \
-  #           -H "Accept: application/vnd.github+json" \
-  #           -H "Authorization: Bearer ${{ secrets.SDLC_READ_ACTION }}" \
-  #           -o downstream-workflow-file.json \
-  #           "https://api.github.com/repos/dso-migrateme/securesdlc-sast/contents/.github/workflows/securesdlc-sast.yml"
-  #     - name: Decode workflow
-  #       run: |
-  #         cat downstream-workflow-file.json | jq -r .content | base64 -d > .github/workflows/workflow.yml
-  #         # cat .github/workflows/workflow.yml
-
-
   securesdlc:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Fetch workflow file
+      - name: test
         run: |
           echo "hi"
 
