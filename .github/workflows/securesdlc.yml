@@ -6,12 +6,13 @@ on:
   workflow_call: {}
 
 jobs:
-  securesdlc-umbrella:
+  securesdlc-test:
     runs-on: ubuntu-24.04
     steps:
-      - name: securesdlc-umbrella
+      - name: securesdlc-test
         run: |
-          echo "hi"
+          echo "securesdlc-test"
 
-  #   uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+  securesdlc-umbrella:
+    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
 
