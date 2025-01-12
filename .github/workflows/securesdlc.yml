@@ -16,7 +16,6 @@ jobs:
           echo "securesdlc-test"
           echo ${{ github.ref_name }}
           echo ${{ github.event.repository.default_branch }}
-          echo "TEST_SECRET: ${{ secrets.TEST_SECRET }}"
 
   securesdlc-umbrella:
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
