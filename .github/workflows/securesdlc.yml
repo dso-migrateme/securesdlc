@@ -20,4 +20,6 @@ jobs:
 
   securesdlc-umbrella:
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+    secrets:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 
