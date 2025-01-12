@@ -1,4 +1,5 @@
 name: SecureSDLC Umbrella
+run-name: "[Required SecureSDLC Workflow] Ref:${{ github.ref_name }}"
 
 on:
   workflow_dispatch: {}
