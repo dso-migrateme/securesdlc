@@ -7,12 +7,13 @@ on:
   # pull_request_target: {} # Gives workflows excessive permissions. Not wanted.
 
 jobs:
-  securesdlc-test:
+  securesdlc-check:
     runs-on: ubuntu-24.04
     steps:
-      - name: securesdlc-test
+      - name: securesdlc-check
         run: |
           echo "securesdlc-test"
+          echo ${{ github.ref_name }}
 
   securesdlc-umbrella:
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
