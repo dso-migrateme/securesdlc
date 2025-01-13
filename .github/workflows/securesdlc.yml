@@ -8,7 +8,7 @@ on:
   # pull_request_target: {} # Gives workflows excessive permissions. Not wanted.
 
 jobs:
-  securesdlc-check:
+  securesdlc-visibility-check:
     runs-on: ubuntu-24.04
     steps:
       - name: securesdlc-check
@@ -17,7 +17,36 @@ jobs:
           echo ${{ github.ref_name }}
           echo ${{ github.event.repository.default_branch }}
 
+      - name: Get Repository Visibility
+        id: get_visibility
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: repo } = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            // The 'visibility' field can be 'public', 'private', or 'internal'
+            return repo.visibility;
+        result-encoding: string
+
+      - name: Display Visibility
+        run: echo "Repository visibility is ${{ steps.get_visibility.outputs.result }}"
+
+      - name: Conditional Step for Public Repos
+        if: steps.get_visibility.outputs.result == 'public'
+        run: echo "This is a public repository."
+
+      - name: Conditional Step for Private Repos
+        if: steps.get_visibility.outputs.result == 'private'
+        run: echo "This is a private repository."
+
+      - name: Conditional Step for Internal Repos
+        if: steps.get_visibility.outputs.result == 'internal'
+        run: echo "This is an internal repository."
+
   securesdlc-umbrella:
+    if: steps.get_visibility.outputs.result != 'public'
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
     secrets:
       SEMGREP_APP_URL: ${{ secrets.SEMGREP_APP_URL }}
