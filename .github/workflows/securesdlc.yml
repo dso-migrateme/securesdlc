@@ -10,6 +10,8 @@ on:
 jobs:
   securesdlc-visibility-check:
     runs-on: ubuntu-24.04
+    outputs:
+      visibility: ${{ steps.get_visibility.outputs.result }}
     steps:
       - name: securesdlc-check
         run: |
@@ -45,7 +47,8 @@ jobs:
         run: echo "This is an internal repository."
 
   securesdlc-umbrella:
-    if: steps.get_visibility.outputs.result != 'public'
+    needs: check-visibility
+    if: needs.check-visibility.outputs.visibility == 'public'
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
     secrets:
       SEMGREP_APP_URL: ${{ secrets.SEMGREP_APP_URL }}
