@@ -47,8 +47,8 @@ jobs:
         run: echo "This is an internal repository."
 
   securesdlc-umbrella:
-    needs: securesdlc-visibility-check
-    if: needs.securesdlc-visibility-check.outputs.visibility == 'public'
+    needs: [securesdlc-visibility-check]
+    if: ${{ needs.securesdlc-visibility-check.outputs.visibility == 'public' }}
     uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
     secrets:
       SEMGREP_APP_URL: ${{ secrets.SEMGREP_APP_URL }}
