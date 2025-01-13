@@ -28,7 +28,6 @@ jobs:
             });
             // The 'visibility' field can be 'public', 'private', or 'internal'
             return repo.visibility;
-        result-encoding: string
 
       - name: Display Visibility
         run: echo "Repository visibility is ${{ steps.get_visibility.outputs.result }}"
