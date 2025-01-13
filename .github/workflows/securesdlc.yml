@@ -11,7 +11,7 @@ jobs:
   securesdlc-visibility-check:
     runs-on: ubuntu-24.04
     outputs:
-      visibility: ${{ steps.get_visibility.outputs.result }}
+      visibility: ${{ steps.get_visibility.outputs.visibility }}
     steps:
       - name: Init
         run: |
@@ -29,22 +29,12 @@ jobs:
               repo: context.repo.repo
             });
             // The 'visibility' field can be 'public', 'private', or 'internal'
-            return repo.visibility;
+            const visibility = repo.visibility;
+            console.log(`Repository visibility: ${visibility}`);
+            core.setOutput('visibility', visibility);
 
       - name: Display Visibility
-        run: echo "Repository visibility is ${{ steps.get_visibility.outputs.result }}"
-
-      - name: Conditional Step for Public Repos
-        if: steps.get_visibility.outputs.result == 'public'
-        run: echo "This is a public repository."
-
-      - name: Conditional Step for Private Repos
-        if: steps.get_visibility.outputs.result == 'private'
-        run: echo "This is a private repository."
-
-      - name: Conditional Step for Internal Repos
-        if: steps.get_visibility.outputs.result == 'internal'
-        run: echo "This is an internal repository."
+        run: echo "Repository visibility is ${{ steps.get_visibility.outputs.visibility }}"
 
   securesdlc-umbrella:
     needs: [securesdlc-visibility-check]
