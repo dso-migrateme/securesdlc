@@ -39,7 +39,7 @@ jobs:
   securesdlc-umbrella:
     needs: [securesdlc-visibility-check]
     if: ${{ needs.securesdlc-visibility-check.outputs.visibility != 'public' }}
-    uses: nautilus-wraith/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
+    uses: dso-migrateme/securesdlc-sast/.github/workflows/securesdlc-sast.yml@main
     secrets:
       SEMGREP_APP_URL: ${{ secrets.SEMGREP_APP_URL }}
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
