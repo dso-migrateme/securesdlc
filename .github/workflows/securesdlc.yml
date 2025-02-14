@@ -9,6 +9,5 @@ on:
 
 jobs:
   securesdlc-sast:
-    if: ${{ needs.securesdlc-visibility-check.outputs.visibility != 'public' }}
     uses: nautilus-wraith/securesdlc-umbrella/.github/workflows/securesdlc.yml@main
 
