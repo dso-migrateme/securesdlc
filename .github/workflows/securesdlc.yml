@@ -8,6 +8,9 @@ on:
   # pull_request_target: {} # Gives workflows excessive permissions. Not wanted.
 
 jobs:
-  securesdlc-sast:
+  securesdlc:
     uses: nautilus-wraith/securesdlc-umbrella/.github/workflows/securesdlc.yml@main
+    secrets:
+      SEMGREP_APP_URL: ${{ secrets.SEMGREP_APP_URL }}
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 
